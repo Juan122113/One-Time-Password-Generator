@@ -10,6 +10,7 @@ export const OTPGenerator = () => {
   const [ref, setRef] = useState("Click 'Generate OTP' to get a code");
   const [h2Otp, setH2Otp] = useState("");
   const [num, setNum] = useState(five);
+  const [buttonPressState, setButtonPressState] = useState(false); 
 
   
 
@@ -41,6 +42,8 @@ export const OTPGenerator = () => {
     // setRef("Expires in: " + setInterval(count(five), 1000) + " seconds");
     
     buttonPress = true;
+
+    setButtonPressState(true);
 
     console.log(buttonPress);
     
@@ -161,10 +164,18 @@ export const OTPGenerator = () => {
     // }
   }
 
+  // if (handleClick()) {
+  //   buttonPressState = true;
+  // }
+
+  console.log(buttonPress);
+  console.log(buttonPressState);
+
   useEffect(() => {
     //pRef.value = "a"
     console.log("Component renders");
     console.log(buttonPress);
+    console.log(buttonPressState);
     console.log(num);
     // setRef("Expires in: " + num + " seconds");
 
@@ -196,30 +207,86 @@ export const OTPGenerator = () => {
 
     let interv;
 
-    console.log(interv);
-    // setNum(numDecr);
+    if (ref != "Click 'Generate OTP' to get a code") {
+      console.log(ref);
+      numDecr(interv);
 
-    function numDecr() {
-      if (!interv) {
-        return interv = setInterval(numFunc, 1000);
-        console.log(interv);
-      }
+      function numDecr() {
+        if (!interv) {
+          return interv = setInterval(numFunc, 1000);
+          console.log(interv);
+        }
+
+    setNum(interv);
       
-    console.log(num);
-    console.log(five);
-    }
+        console.log(num);
+        console.log(five);
+      }
 
     function numFunc() {
       // if (num != 0) {
       //   return num--
       // }
-      while (five >=1) {
-       five--;
-      //  setNum(five);
+      // while (five >=1) {
+      //  five--;
+      // //  setNum(five);
+      // }
+      if (five > 0) {
+        // setNum(five);
+        five--
+        // setNum(five);
       }
+      }
+      
       console.log(five);
       // return five
+    } else {
+       return () => {
+      // setNum(clearInterval(num));
+      // setNum(clearInterval(interv));
+      // clearInterval(setNum);
+      // clearInterval(interval);
+
+      function stopInterv() {
+        clearInterval(interv);
+        interv = null;
+      }
     }
+    }
+
+    console.log(interv);
+    // setNum(numDecr);
+
+    // numDecr(interv);
+
+    // function numDecr() {
+    //   if (!interv) {
+    //     return interv = setInterval(numFunc, 1000);
+    //     console.log(interv);
+    //   }
+
+    // setNum(interv);
+      
+    // console.log(num);
+    // console.log(five);
+    // }
+
+    // function numFunc() {
+    //   // if (num != 0) {
+    //   //   return num--
+    //   // }
+    //   // while (five >=1) {
+    //   //  five--;
+    //   // //  setNum(five);
+    //   // }
+    //   if (five > 0) {
+    //     five--
+    //     setNum(five);
+    //   }
+      
+    //   console.log(five);
+    //   // return five
+    // }
 
     // setNum(interv);
     // setNum(numDecr);
@@ -235,22 +302,22 @@ export const OTPGenerator = () => {
     //   // }
     // }), 1000);
 
-    return () => {
-      // setNum(clearInterval(num));
-      // setNum(clearInterval(interv));
-      // clearInterval(setNum);
-      // clearInterval(interval);
+    // return () => {
+    //   // setNum(clearInterval(num));
+    //   // setNum(clearInterval(interv));
+    //   // clearInterval(setNum);
+    //   // clearInterval(interval);
 
-      function stopInterv() {
-        clearInterval(interv);
-        interv = null;
-      }
-    }
+    //   function stopInterv() {
+    //     clearInterval(interv);
+    //     interv = null;
+    //   }
+    // }
 
     // setNum(numDecr);
 
     
-  });
+  }, [ref]);
 
   return (
     <div className="container" style={{backgroundColor: "darkblue", color: "skyblue", padding: 0, margin: 0}}>
