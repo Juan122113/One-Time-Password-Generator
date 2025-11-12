@@ -4,6 +4,9 @@ export const OTPGenerator = () => {
 
   let buttonPress = false;
   let five = 5;
+  
+        let remainingTime;
+
 
   //const [otp, setOtp] = useState();
   const pRef = useRef("");
@@ -51,7 +54,7 @@ export const OTPGenerator = () => {
 
     // setNum(num);
 
-    setRef("Expires in: " + num + " seconds");
+    // setRef("Expires in: " + num + " seconds");
 
   //   useEffect(() => {
   //   //pRef.value = "a"
@@ -178,6 +181,7 @@ export const OTPGenerator = () => {
     console.log(buttonPressState);
     console.log(num);
     // setRef("Expires in: " + num + " seconds");
+    setRef("Expires in: " + remainingTime + " seconds");
 
     
 
@@ -209,21 +213,23 @@ export const OTPGenerator = () => {
 
     if (ref != "Click 'Generate OTP' to get a code") {
       console.log(ref);
-      numDecr(interv);
+      // numDecr(interv);
+      console.log(interv);
 
-      function numDecr() {
-        if (!interv) {
-          return interv = setInterval(numFunc, 1000);
-          console.log(interv);
-        }
+    //   function numDecr() {
+    //     if (!interv) {
+    //       console.log(interv);
+    //       interv = setInterval(numFunc, 1000);
+    //       console.log(interv);
+    //     }
 
-    setNum(interv);
+    // setNum(interv);
       
-        console.log(num);
-        console.log(five);
-      }
+    //     console.log(num);
+    //     console.log(five);
+    //   }
 
-    function numFunc() {
+      function numFunc() {
       // if (num != 0) {
       //   return num--
       // }
@@ -231,27 +237,55 @@ export const OTPGenerator = () => {
       //  five--;
       // //  setNum(five);
       // }
-      if (five > 0) {
+        
+
+        if (five > 0) {
         // setNum(five);
-        five--
+          console.log(five);
+          // return five--
+          remainingTime = five--
         // setNum(five);
+        // setNum(remainingTime);
+          console.log(five);
+          console.log(remainingTime);
+          // five - 1
+          // return five;
+        }
+        
+        setNum(remainingTime);
+        // setRef("Expires in: " + remainingTime + " seconds");
       }
+      
+      numDecr(interv);
+
+      function numDecr() {
+        if (!interv) {
+          console.log(interv);
+          interv = setInterval(numFunc, 1000);
+          console.log(numFunc);
+          console.log(interv);
+        }
+
+    // setNum(interv);
+      
+        console.log(num);
+        console.log(five);
       }
       
       console.log(five);
       // return five
     } else {
-       return () => {
+      return () => {
       // setNum(clearInterval(num));
       // setNum(clearInterval(interv));
       // clearInterval(setNum);
       // clearInterval(interval);
 
-      function stopInterv() {
-        clearInterval(interv);
-        interv = null;
+        function stopInterv() {
+          clearInterval(interv);
+          interv = null;
+        }
       }
-    }
     }
 
     console.log(interv);
