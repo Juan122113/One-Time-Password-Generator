@@ -3,16 +3,17 @@ const { useState, useEffect, useRef } = React;
 export const OTPGenerator = () => {
 
   let buttonPress = false;
+  let five = 5;
 
   //const [otp, setOtp] = useState();
   const pRef = useRef("");
   const [ref, setRef] = useState("Click 'Generate OTP' to get a code");
   const [h2Otp, setH2Otp] = useState("");
-  const [num, setNum] = useState(5);
+  const [num, setNum] = useState(five);
 
-  // let five = 5;
+  
 
-  const handleClick = (num) => {
+  const handleClick = () => {
     // console.log(event);
       //console.log(setOtp(Math.floor(Math.random() * 1000000)));
       //pRef.current.value = "a";
@@ -45,7 +46,9 @@ export const OTPGenerator = () => {
     
     setH2Otp(String(Math.floor(Math.random() * 1000000)).padStart(6, '0'));
 
-    setRef("Expires in: " + setNum(num) + " seconds");
+    // setNum(num);
+
+    setRef("Expires in: " + num + " seconds");
 
   //   useEffect(() => {
   //   //pRef.value = "a"
@@ -193,24 +196,33 @@ export const OTPGenerator = () => {
 
     let interv;
 
-    setNum(numDecr);
+    console.log(interv);
+    // setNum(numDecr);
 
     function numDecr() {
       if (!interv) {
-        interv = setInterval(numFunc, 1000);
+        return interv = setInterval(numFunc, 1000);
+        console.log(interv);
       }
       
     console.log(num);
+    console.log(five);
     }
 
     function numFunc() {
       // if (num != 0) {
       //   return num--
       // }
-      while (num >=1) {
-       setNum(num--)
+      while (five >=1) {
+       five--;
+      //  setNum(five);
       }
+      console.log(five);
+      // return five
     }
+
+    // setNum(interv);
+    // setNum(numDecr);
 
     // setNum(setInterval(function numDecr(num) {
     //   while (num >= 1) {
@@ -235,8 +247,10 @@ export const OTPGenerator = () => {
       }
     }
 
+    // setNum(numDecr);
+
     
-  }, [num]);
+  });
 
   return (
     <div className="container" style={{backgroundColor: "darkblue", color: "skyblue", padding: 0, margin: 0}}>
@@ -244,7 +258,7 @@ export const OTPGenerator = () => {
     
       <h2 id="otp-display">{h2Otp}</h2>
       <p id="otp-timer" aria-live="polite" ref={pRef}>{ref}</p>
-      <button id="generate-otp-button" onClick={() => handleClick(num)}>Generate OTP</button>
+      <button id="generate-otp-button" onClick={() => handleClick()}>Generate OTP</button>
     </div>
 
     );
