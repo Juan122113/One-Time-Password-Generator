@@ -3,16 +3,14 @@ const { useState, useEffect, useRef } = React;
 export const OTPGenerator = () => {
 
   let buttonPress = false;
-  let five = 5;
-  
-        let remainingTime;
-
+  // let five = 5;
+  let remainingTime;
 
   //const [otp, setOtp] = useState();
   const pRef = useRef("");
   const [ref, setRef] = useState("Click 'Generate OTP' to get a code");
   const [h2Otp, setH2Otp] = useState("");
-  const [num, setNum] = useState(five);
+  const [num, setNum] = useState(5);
   const [buttonPressState, setButtonPressState] = useState(false); 
 
   
@@ -54,7 +52,7 @@ export const OTPGenerator = () => {
 
     // setNum(num);
 
-    // setRef("Expires in: " + num + " seconds");
+    setRef("Expires in: " + num + " seconds");
 
   //   useEffect(() => {
   //   //pRef.value = "a"
@@ -171,17 +169,17 @@ export const OTPGenerator = () => {
   //   buttonPressState = true;
   // }
 
-  console.log(buttonPress);
+  // console.log(buttonPress);
   console.log(buttonPressState);
 
   useEffect(() => {
     //pRef.value = "a"
     console.log("Component renders");
-    console.log(buttonPress);
+    // console.log(buttonPress);
     console.log(buttonPressState);
     console.log(num);
     // setRef("Expires in: " + num + " seconds");
-    setRef("Expires in: " + remainingTime + " seconds");
+    // setRef("Expires in: " + remainingTime + " seconds");
 
     
 
@@ -211,10 +209,10 @@ export const OTPGenerator = () => {
 
     let interv;
 
-    if (ref != "Click 'Generate OTP' to get a code") {
+    if (buttonPressState) {
       console.log(ref);
       // numDecr(interv);
-      console.log(interv);
+      // console.log(interv);
 
     //   function numDecr() {
     //     if (!interv) {
@@ -229,67 +227,94 @@ export const OTPGenerator = () => {
     //     console.log(five);
     //   }
 
-      function numFunc() {
-      // if (num != 0) {
-      //   return num--
-      // }
-      // while (five >=1) {
-      //  five--;
-      // //  setNum(five);
-      // }
+      const countdownInterval = setInterval(() => {
+        let five = 5;
+        let remainingTime = five--;
+        console.log(remainingTime);
         
+        // let five = 5;
+        // setNum(five--)
+        // five--
 
-        if (five > 0) {
-        // setNum(five);
-          console.log(five);
-          // return five--
-          remainingTime = five--
-        // setNum(five);
-        // setNum(remainingTime);
-          console.log(five);
-          console.log(remainingTime);
-          // five - 1
-          // return five;
+        if (remainingTime <= 0) {
+          remainingTime = 0;
+          clearInterval(countdownInterval);
+          console.log("Countdown complete")
         }
-        
+
         setNum(remainingTime);
-        // setRef("Expires in: " + remainingTime + " seconds");
-      }
-      
-      numDecr(interv);
+        // setNum(five);
+      }, 1000)
 
-      function numDecr() {
-        if (!interv) {
-          console.log(interv);
-          interv = setInterval(numFunc, 1000);
-          console.log(numFunc);
-          console.log(interv);
-        }
+    //   function numFunc() {
+    //   // if (num != 0) {
+    //   //   return num--
+    //   // }
+    //   // while (five >=1) {
+    //   //  five--;
+    //   // //  setNum(five);
+    //   // }
+        
 
-    // setNum(interv);
+    //     if (five > 0) {
+    //     // setNum(five);
+    //       console.log(five);
+    //       // return five--
+    //       five--
+    //       // remainingTime = five--
+    //       setNum(five);
+    //     // setNum(remainingTime);
+    //       console.log(five);
+    //       console.log(remainingTime);
+    //       // five - 1
+    //       // return five;
+    //     }
+
+    //     if (five <= 0) {
+    //       five = 0;
+    //       clearInterval(numDecr);
+    //     }
+        
+    //     // setNum(remainingTime);
+    //     // setRef("Expires in: " + remainingTime + " seconds");
+    //   }
       
-        console.log(num);
-        console.log(five);
-      }
+    //   numDecr(interv);
+
+    // //   function numDecr() {
+    // //     if (!interv) {
+    // //       console.log(interv);
+    // //       interv = setInterval(numFunc, 1000);
+    // //       console.log(numFunc);
+    // //       console.log(interv);
+    // //     }
+
+    // // // setNum(interv);
       
-      console.log(five);
+    // //     console.log(num);
+    // //     console.log(five);
+    // //   }
+      
+    //   console.log(five);
       // return five
-    } else {
-      return () => {
-      // setNum(clearInterval(num));
-      // setNum(clearInterval(interv));
-      // clearInterval(setNum);
-      // clearInterval(interval);
+    } //else {
+      // return () => {
+      // // setNum(clearInterval(num));
+      // // setNum(clearInterval(interv));
+      // // clearInterval(setNum);
+      // // clearInterval(interval);
 
-        function stopInterv() {
-          clearInterval(interv);
-          interv = null;
-        }
-      }
-    }
+      //   function stopInterv() {
+      //     clearInterval(interv);
+      //     interv = null;
+      //   }
+      // }
+  
 
-    console.log(interv);
+    // console.log(interv);
     // setNum(numDecr);
+    // console.log(five);
+    // setNum(five);
 
     // numDecr(interv);
 
@@ -351,7 +376,7 @@ export const OTPGenerator = () => {
     // setNum(numDecr);
 
     
-  }, [ref]);
+  }, [ref, num]);
 
   return (
     <div className="container" style={{backgroundColor: "darkblue", color: "skyblue", padding: 0, margin: 0}}>
@@ -359,7 +384,7 @@ export const OTPGenerator = () => {
     
       <h2 id="otp-display">{h2Otp}</h2>
       <p id="otp-timer" aria-live="polite" ref={pRef}>{ref}</p>
-      <button id="generate-otp-button" onClick={() => handleClick()}>Generate OTP</button>
+      <button id="generate-otp-button" onClick={handleClick}>Generate OTP</button>
     </div>
 
     );
