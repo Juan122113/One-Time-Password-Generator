@@ -8,14 +8,15 @@ export const OTPGenerator = () => {
   // let remainingTime;
 
   //const [otp, setOtp] = useState();
-  const pRef = useRef("");
+  // const pRef = useRef("");
+  const buttonRef = useRef();
   const [ref, setRef] = useState("");
   const [h2Otp, setH2Otp] = useState("Click 'Generate OTP' to get a code");
   const [num, setNum] = useState(5);
   const [buttonPressState, setButtonPressState] = useState(false); 
   const [remainingTime, setRemainingTime] = useState(5);
 
-  
+  console.log(buttonRef);
 
   const handleClick = () => {
     // console.log(event);
@@ -228,7 +229,10 @@ export const OTPGenerator = () => {
     //     console.log(num);
     //     console.log(five);
     //   }
-    setRef("Expires in: " + num + " seconds");
+
+      buttonRef.current.disabled = true;
+
+      setRef("Expires in: " + num + " seconds");
 
       const countdownInterval = setInterval(() => {
         // let five = [5, 4, 3, 2, 1];
@@ -263,23 +267,28 @@ export const OTPGenerator = () => {
         // setRef("Expires in: " + num + " seconds");
 
         // five = 5;
-        setNum(num - 1);
+        // setRef("Expires in: " + setNum(num - 1) + " seconds");
+        // setNum(num - 1);
         // five = five-1;
         // setRef("Expires in: " + num + " seconds");
-
+        setRef("Expires in: " + setNum(num-1) + " seconds");
+        setNum(num-1);
         console.log(remainingTime);
         
         // let five = 5;
         // setNum(five--)
         // five--
 
-        if (num <= 0) {
+        if (num <= 1) {
           // setRemainingTime(0);
           // five = 0;
-          setNum(0);
+          setNum(1);
           clearInterval(countdownInterval);
           console.log("Countdown complete");
           setButtonPressState(false);
+          buttonRef.current.disabled = false;
+          setRef("OTP expired. Click the button to generate a new OTP.");
+          setNum(5);
         }
 
         // setNum(remainingTime);
@@ -425,8 +434,8 @@ export const OTPGenerator = () => {
     <div className="container" style={{backgroundColor: "darkblue", color: "skyblue", padding: 0, margin: 0}}>
       <h1 id="otp-title">OTP Generator</h1>
       <h2 id="otp-display">{h2Otp}</h2>
-      <p id="otp-timer" aria-live="polite" ref={pRef}>{ref}</p>
-      <button id="generate-otp-button" onClick={handleClick}>Generate OTP</button>
+      <p id="otp-timer" aria-live="polite">{ref}</p>
+      <button id="generate-otp-button" onClick={handleClick} ref={buttonRef} >Generate OTP</button>
     </div>
 
     );
