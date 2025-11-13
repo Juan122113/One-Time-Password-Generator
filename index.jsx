@@ -3,12 +3,13 @@ const { useState, useEffect, useRef } = React;
 export const OTPGenerator = () => {
 
   let buttonPress = false;
-  // let five = 5;
+  let five = 5;
+  // let five;
   // let remainingTime;
 
   //const [otp, setOtp] = useState();
   const pRef = useRef("");
-  const [ref, setRef] = useState("Click 'Generate OTP' to get a code");
+  const [ref, setRef] = useState("");
   const [h2Otp, setH2Otp] = useState("Click 'Generate OTP' to get a code");
   const [num, setNum] = useState(5);
   const [buttonPressState, setButtonPressState] = useState(false); 
@@ -43,17 +44,17 @@ export const OTPGenerator = () => {
       
     // setRef("Expires in: " + setInterval(count(five), 1000) + " seconds");
     
-    buttonPress = true;
+    // buttonPress = true;
 
     setButtonPressState(true);
 
-    console.log(buttonPress);
+    // console.log(buttonPress);
     
     setH2Otp(String(Math.floor(Math.random() * 1000000)).padStart(6, '0'));
 
     // setNum(num);
 
-    setRef("Expires in: " + num + " seconds");
+    // setRef("Expires in: " + num + " seconds");
 
   //   useEffect(() => {
   //   //pRef.value = "a"
@@ -227,9 +228,12 @@ export const OTPGenerator = () => {
     //     console.log(num);
     //     console.log(five);
     //   }
+    setRef("Expires in: " + num + " seconds");
 
       const countdownInterval = setInterval(() => {
-        let five = [5, 4, 3, 2, 1];
+        // let five = [5, 4, 3, 2, 1];
+        // let five = 5;
+        // let count = five--;
         // let remainingTime = five--;
         // let remainingTime = 5-1;
 
@@ -255,22 +259,35 @@ export const OTPGenerator = () => {
 
         // setNum(five.map((i) => {setNum(i);}));
 
+        // setRef("Expires in: " + five + " seconds");
+        // setRef("Expires in: " + num + " seconds");
+
+        // five = 5;
+        setNum(num - 1);
+        // five = five-1;
+        // setRef("Expires in: " + num + " seconds");
+
         console.log(remainingTime);
         
         // let five = 5;
         // setNum(five--)
         // five--
 
-        if (remainingTime <= 0) {
-          setRemainingTime(0);
+        if (num <= 0) {
+          // setRemainingTime(0);
+          // five = 0;
+          setNum(0);
           clearInterval(countdownInterval);
-          console.log("Countdown complete")
+          console.log("Countdown complete");
+          setButtonPressState(false);
         }
 
         // setNum(remainingTime);
         // setNum(five);
         // setRef("Expires in: " + num + " seconds");
       }, 1000)
+
+      return () => clearInterval(countdownInterval);
 
     //   function numFunc() {
     //   // if (num != 0) {
@@ -406,10 +423,9 @@ export const OTPGenerator = () => {
 
   return (
     <div className="container" style={{backgroundColor: "darkblue", color: "skyblue", padding: 0, margin: 0}}>
-      <h1 id="otp-title">OTP Generator </h1>
-    
+      <h1 id="otp-title">OTP Generator</h1>
       <h2 id="otp-display">{h2Otp}</h2>
-      <p id="otp-timer" aria-live="polite" ref={pRef}></p>
+      <p id="otp-timer" aria-live="polite" ref={pRef}>{ref}</p>
       <button id="generate-otp-button" onClick={handleClick}>Generate OTP</button>
     </div>
 
